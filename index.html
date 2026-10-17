@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>InfoLivres — مكتبة الكتب المجانية PDF</title>
+  <meta name="description" content="تطبيق لتحميل الكتب المجانية من InfoLivres.org مصنّفة حسب التخصصات: فلسفة، روايات، طب، هندسة، حاسوب، رياضيات، فيزياء، علم نفس وأكثر — تحميل مباشر بصيغة PDF بدون تسجيل.">
+  <meta name="theme-color" content="#0f3d2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="InfoLivres">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Amiri:wght@400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main" data-i18n="skip">تخطَّ إلى المحتوى</a>
+
+<div class="offline-badge" id="offlineBadge" hidden data-i18n="offline.badge">وضع عدم الاتصال — الكتب المخزّنة متاحة</div>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="#" aria-label="InfoLivres">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 10c6-3 12-3 18 1 6-4 12-4 18-1v28c-6-3-12-3-18 1-6-4-12-4-18-1z"/>
+          <path d="M24 11v28"/>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <strong>InfoLivres</strong>
+        <small data-i18n="brand.tagline">مكتبة الكتب المجانية</small>
+      </span>
+    </a>
+
+    <div class="topbar__actions">
+      <div class="langswitch" id="langSwitch" role="group" data-i18n-aria="lang.aria" aria-label="تغيير اللغة"></div>
+      <button type="button" class="icon-btn" id="btnInstall" hidden data-i18n-title="btn.install" title="تثبيت التطبيق">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <span data-i18n="btn.install">تثبيت</span>
+      </button>
+      <button type="button" class="icon-btn" id="btnFav" data-i18n-title="btn.fav" title="المفضلة">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <span id="favCount">المفضلة</span>
+      </button>
+      <button type="button" class="icon-btn" id="btnPrintList" data-i18n-title="btn.print" title="طباعة القائمة">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg>
+        <span data-i18n="btn.print">طباعة</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero__inner">
+    <div class="hero__text">
+      <p class="hero__kicker" data-i18n="hero.kicker">كتب حرّة · تحميل مباشر · بلا تسجيل</p>
+      <h1 data-i18n="hero.title">مكتبة الكتب المجانية</h1>
+      <p class="hero__lead" data-i18n-html="hero.lead">
+        كتب PDF مجانية من <a href="https://infolivres.org/" target="_blank" rel="noopener">InfoLivres.org</a> و<a href="https://www.kutubgate.com/" target="_blank" rel="noopener">بوابة الكتب</a>،
+        مصنّفة حسب التخصصات: الفلسفة والروايات والطب والهندسة والحاسوب والرياضيات والفيزياء وعلم النفس…
+      </p>
+      <form class="search" id="searchForm" role="search">
+        <svg class="search__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="searchInput" placeholder="ابحث بعنوان الكتاب أو اسم المؤلف…" autocomplete="off" data-i18n-ph="search.ph" data-i18n-aria="search.aria" aria-label="بحث">
+        <button type="button" class="search__clear" id="searchClear" hidden data-i18n-aria="search.clear" aria-label="مسح البحث">×</button>
+      </form>
+      <ul class="stats" id="stats"></ul>
+    </div>
+    <div class="hero__art" aria-hidden="true">
+      <div class="shelf">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="filters" aria-label="التصنيفات والترتيب">
+  <div class="wrap filters__inner">
+    <div class="sources" id="sourceFilter" role="group" data-i18n-aria="source.aria" aria-label="تصفية حسب المصدر"></div>
+    <div class="chips" id="chips" role="tablist"></div>
+    <div class="filters__tools">
+      <label class="select">
+        <span data-i18n="sort.label">الترتيب</span>
+        <select id="sortSelect">
+          <option value="rating" data-i18n="sort.rating">الأعلى تقييماً</option>
+          <option value="title" data-i18n="sort.title">الاسم (أبجدي)</option>
+          <option value="year" data-i18n="sort.year">الأحدث</option>
+          <option value="pages" data-i18n="sort.pages">الأكثر صفحات</option>
+          <option value="downloads" data-i18n="sort.downloads">الأكثر تحميلاً عندك</option>
+        </select>
+      </label>
+      <button type="button" class="tools-btn" id="btnOnlyFav" aria-pressed="false" data-i18n="onlyFav">♡ المفضلة فقط</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+  <div class="results-bar">
+    <p id="resultsText" class="results-text"></p>
+    <button type="button" class="link-btn" id="btnReset" hidden data-i18n="reset">إعادة التعيين</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="empty" id="empty" hidden>
+    <p class="empty__emoji">📚</p>
+    <h2 data-i18n="empty.none.title">لا توجد نتائج مطابقة</h2>
+    <p data-i18n="empty.none.text">جرّب كلمة بحث أخرى أو اختر تخصصاً مختلفاً.</p>
+    <button type="button" class="btn primary" id="btnEmptyReset" data-i18n="reset.all">عرض كل الكتب</button>
+  </div>
+</main>
+
+<section class="cats wrap" aria-labelledby="catsTitle">
+  <h2 id="catsTitle" data-i18n="cats.title">تصفّح كل التخصصات على الموقع</h2>
+  <p class="cats__lead" data-i18n-html="cats.lead">33 تخصصاً وأكثر من 3500 كتاب مجاني على <a href="https://infolivres.org/livres-gratuits-pdf/" target="_blank" rel="noopener">InfoLivres.org</a> — افتح التخصص الذي يهمّك لاستكشاف كامل مجموعته.</p>
+  <div class="cats__grid" id="catsGrid"></div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__col">
+      <p class="footer__brand" data-i18n="footer.brand">InfoLivres — مكتبة الكتب المجانية</p>
+      <p data-i18n-html="footer.text">كتب من الملكية العامة أو بترخيص حرّ، والمصدر الكامل هو موقع <a href="https://infolivres.org/" target="_blank" rel="noopener">infolivres.org</a>. جميع الحقوق لأصحابها.</p>
+    </div>
+    <div class="footer__col">
+      <p class="footer__credit">
+        <span data-i18n="footer.credit">هندسة وإخراج</span>
+        <strong>حاج إسماعيل إبراهيم</strong>
+      </p>
+      <p class="footer__small" data-i18n="footer.version">تطبيق ويب تقدّمي (PWA) يعمل دون اتصال · الإصدار 1.2.0</p>
+    </div>
+  </div>
+</footer>
+
+<!-- نافذة تفاصيل الكتاب -->
+<div class="modal" id="modal" hidden aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal__close" data-close data-i18n-aria="modal.close" aria-label="إغلاق">×</button>
+    <div class="modal__content" id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+
+<!-- منطقة الطباعة (تُملأ ديناميكياً) -->
+<div id="printArea" class="print-area" aria-hidden="true"></div>
+
+<script src="data.js"></script>
+<script src="data-tech.js"></script>
+<script src="data-kutub.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

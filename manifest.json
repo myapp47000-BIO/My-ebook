@@ -1,0 +1,36 @@
+{
+  "id": "infolivres-pwa",
+  "name": "InfoLivres — مكتبة الكتب المجانية PDF",
+  "short_name": "InfoLivres",
+  "description": "مكتبة كتب مجانية بصيغة PDF من InfoLivres.org مصنّفة حسب التخصصات، مع تقييم بالنجوم، قائمة مفضلة، وتحميل وطباعة مباشرة. هندسة وإخراج: حاج إسماعيل إبراهيم.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#f7f3ea",
+  "theme_color": "#0f3d2e",
+  "categories": ["books", "education", "reference"],
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "الأعلى تقييماً",
+      "short_name": "الأفضل",
+      "url": "./index.html?sort=rating",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "المفضلة",
+      "short_name": "المفضلة",
+      "url": "./index.html?fav=1",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
